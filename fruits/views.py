@@ -55,7 +55,7 @@ class AddFruitView(View):
 class FruitView(View):
     def get(self, request, pk):
         fruit = FruitsModel.objects.get(id=pk)
-        comments = CommentsModel.objects.filter(fruit=pk).order_by("-id")
+        comments = CommentsModel.objects.filter(fruit=pk, user=request.user.id).order_by("-id")
         total_star = 0
         count = 1
         for star in comments:

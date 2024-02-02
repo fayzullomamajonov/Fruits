@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% block content %}
+
+<center>
+  <div style="width: 1140px">
+    <h3>{{ fruit.name }}</h3>
+    <img src="{{ fruit.fruit_image.url }}" alt="{{fruit.name}} image" />
+    <p>Narxi: {{ fruit.price }}/1kg</p>
+    <p style="width: 600px; text-align: center; color: gray">
+      {{ fruit.short_info }}
+    </p>
+    <p>Total star given: {{total_star}}</p>
+  </div>
+  <a style="text-decoration: none" href="{% url 'fruits' %}"><< Ortga</a>
+</center>
+<hr style="width: 1000px" />
+<div style="width: 1140px; margin-left: 80px; margin-top: 30px">
+  <a style="text-decoration: none" href="{% url 'add_comment' fruit.pk %}"
+    >Add Coment</a
+  >
+  {% for comment in comments %}
+  <center>
+    <p>User: {{ comment.user.first_name }} {{ comment.user.last_name }}</p>
+    <p>
+      Comment:
+      <i style="color: gray">{{ comment.comment }}</i>
+    </p>
+    <sup>{{ comment.create_at | date:'d-m-Y' }}</sup>
+
+    <p>star given:{{comment.star_given}}</p>
+    <a style="padding-right: 10px" href="{% url 'update_comment' comment.pk %}"
+      >Update Comment</a
+    >
+    {% if user.is_superuser %}
+    <a href="{% url 'delete_comment' comment.pk %}">Delete Comment</a>
+    {% endif %}
+  </center>
+
+  <hr style="width: 800px" />
+
+  {% endfor %}
+</div>
+
+{% endblock content %}

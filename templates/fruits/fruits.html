@@ -1,0 +1,53 @@
+{%extends 'base.html' %} {% block content %} {% if user.is_superuser %}
+<a style="text-decoration: none" href="{% url 'add_fruit' %}"
+  ><h4 style="width: 1140px; margin-left: 80px; margin-top: 30px">
+    Add Fruit
+  </h4></a
+>
+{% endif %}
+<center>
+  <form method="get" action="{% url 'fruits' %}">
+    <input type="text" name="q" placeholder="Search..." value="{{ query }}" />
+    <input type="submit" value="Search" />
+  </form>
+</center>
+{% for fruit in fruits %}
+<center>
+  <div>
+    <a style="text-decoration: none" href="{% url 'fruit' fruit.pk %}">
+      <h3>{{ fruit.name }}</h3>
+      <img src="{{ fruit.fruit_image.url }}" alt="{{fruit.name}} image" />
+    </a>
+
+    <p>Narxi: {{ fruit.price }}/1kg</p>
+  </div>
+
+  {% if user.is_superuser %}
+  <a href="{% url 'update_fruit' fruit.pk %}">Update</a>
+  <a href="{% url 'delete_fruit' fruit.pk %}">Delete</a>
+  {% endif %}
+  <hr style="width: 1000px" />
+</center>
+
+{% endfor %}
+<center>
+  <div style="padding-bottom: 100px; padding-top: 25px" class="pagination">
+    <span class="step-links">
+      {% if fruits.has_previous %}
+      <a href="?page=1">&laquo; first</a>
+      <a href="?page={{ fruits.previous_page_number }}">previous</a>
+      {% endif %}
+
+      <span class="current">
+        Page {{ fruits.number }} of {{ fruits.paginator.num_pages }}.
+      </span>
+
+      {% if fruits.has_next %}
+      <a href="?page={{ fruits.next_page_number }}">next</a>
+      <a href="?page={{ fruits.paginator.num_pages }}">last &raquo;</a>
+      {% endif %}
+    </span>
+  </div>
+</center>
+
+{% endblock content %}

@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Haqiqatan ham {{ fruit.name }}ni oʻchirib tashlamoqchimisiz?</h2>
+<form method="post" action="{% url 'delete_fruit' fruit.id %}">
+  {% csrf_token %}
+  <input type="submit" value="Delete" />
+</form>
+<br/>
+<a href="{% url 'fruits' %}">Cancel</a>
+{% endblock %}

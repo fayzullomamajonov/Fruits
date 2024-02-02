@@ -1,0 +1,8 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Home Page</h1>
+<a style="text-decoration: none" href="{% url 'login' %}">Login</a>
+<a style="margin-left: 20px;text-decoration: none;" href="{% url 'logout' %}">LogOut</a><br /><br />
+<a style="text-decoration: none" href="{% url 'fruits' %}">Fruits</a><br /><br />
+<a style="text-decoration: none" href="{% url 'profile'  %}">Profile Page</a>
+
+{% endblock content %}

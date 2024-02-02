@@ -1,0 +1,31 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django
+*.log
+*.pot
+*.pyc
+db.sqlite3
+db.sqlite3-journal
+media/
+static/
+
+# Ignore .env file containing sensitive information
+.env
+
+# macOS
+.DS_Store
+
+# Linux
+*.pyc
+
+# Windows
+*.pyc
+*.pyo
+__pycache__
+*.pyd
+
+# Virtual environment
+venv/
